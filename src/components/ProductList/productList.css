@@ -1,0 +1,114 @@
+.product-wrapper .add-to-cart .btn {
+  background: linear-gradient(to bottom right, #3666f8, #5afffa);
+  border: 0;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.product-wrapper .add-to-cart .btn:not([disabled]):focus {
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(59, 238, 247, 0.5),
+    0.125rem 0.125rem 1rem rgba(90, 255, 236, 0.5);
+}
+
+.product-wrapper .add-to-cart .btn:not([disabled]):hover {
+  font-weight: 600;
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(54, 193, 243, 0.5),
+    0.125rem 0.125rem 1rem rgba(90, 167, 255, 0.5);
+}
+
+
+.products-list-wrapper {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.product-wrapper {
+    max-width: 350px;
+    max-height: fit-content;
+    text-align: center;
+    margin: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-wrapper:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.product-wrapper .product {
+    position: relative;
+}
+
+.product-wrapper .product-img {
+    background-color:#F5F6F6;
+    border-radius: 16px;
+}
+
+.product-wrapper .product-img img {
+    width: 100%;
+}
+
+.product-wrapper .favorite-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex
+}
+
+.product-wrapper .favorite-icon:hover {
+    background-color: pink;
+}
+
+.product-wrapper .product-title h4{
+    font-weight: 600;
+}
+
+.product-wrapper .product-title,.product-wrapper .product-cost {
+    display: inline-block;
+}
+
+.product-wrapper  .product-details {
+    padding: 8px;
+}
+
+.product-wrapper .product-title {
+    margin: 0 18px;
+}
+
+.product-wrapper .product-cost span {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.product-wrapper .product-rating {
+    margin: 0 0 9px 0;
+    display: flex;
+    justify-content: center;
+}

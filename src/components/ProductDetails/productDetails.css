@@ -1,0 +1,17 @@
+.product-details-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.product-details-wrapper .progressive-bar {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+
