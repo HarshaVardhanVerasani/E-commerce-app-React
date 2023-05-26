@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
+  const cart = useSelector((store) => store.e_commerce.CartItems);
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -33,7 +35,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cart">
-                Cart
+                Cart {cart.length ? cart.length : ""}
               </Link>
             </li>
             <li className="nav-item">

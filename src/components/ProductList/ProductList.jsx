@@ -1,16 +1,30 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addToCart, removeFromCart } from "../../redux/slice";
 import "../ProductList/productList.css";
 
 const ProductList = () => {
+  const store = useSelector((store) => store.e_commerce.TotalProducts);
+  const cart = useSelector((store) => store.e_commerce.CartItems);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const store = useSelector((store) => store.e_commerce.productsList);
 
-  function handleAddToCart(id) {
-    console.log(id);
+  function handleAddOrRemoveFromCart(e, id) {
+    if (e.target.name === "ADD_TO_CART") {
+      let findProduct = store.find((product) => product.id === Number(id));
+      findProduct = { ...findProduct, quantity: 1 };
+      dispatch(addToCart(findProduct));
+    } else if (e.target.name === "REMOVE_FROM_CART") {
+      let newCart = cart.filter((product) => product.id !== Number(id));
+      dispatch(removeFromCart(newCart));
+    }
   }
 
-  function handleClick(id, title) {
+  function showSingleProduct(e, id, title) {
+    if (e.target.tagName === "BUTTON") {
+      handleAddOrRemoveFromCart(e, id);
+      return;
+    }
     navigate(`/product-details/${id}/${title}`);
   }
 
@@ -20,7 +34,7 @@ const ProductList = () => {
       <div
         className="product-wrapper"
         key={id}
-        onClick={() => handleClick(id, title)}
+        onClick={(e) => showSingleProduct(e, id, title)}
       >
         <div className="product">
           <div className="product-img">
@@ -38,8 +52,7 @@ const ProductList = () => {
             <h4>{title}</h4>
           </div>
           <div className="product-cost">
-            <span>$</span>
-            <span>{price}</span>
+            <span>${price}</span>
           </div>
           <div className="product-rating">
             <div className="stars">
@@ -57,16 +70,33 @@ const ProductList = () => {
             </div>
           </div>
           <div className="add-to-cart">
-            <button className="btn" onClick={() => handleAddToCart(id)}>
-              Add to Cart
-            </button>
+            {cart.some((product) => product.id === id) ? (
+              <button name="REMOVE_FROM_CART" className="btn btn-danger">
+                Remove from Cart
+              </button>
+            ) : (
+              <button name="ADD_TO_CART" className="btn btn-primary">
+                Add to Cart
+              </button>
+            )}
           </div>
         </div>
       </div>
     );
   });
 
-  return <div className="products-list-wrapper">{renderList}</div>;
+  return (
+    <>
+      {renderList.length === 0 && (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
+      <div className="products-list-wrapper">{renderList}</div>
+    </>
+  );
 };
 
 export default ProductList;

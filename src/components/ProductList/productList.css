@@ -1,61 +1,24 @@
-.product-wrapper .add-to-cart .btn {
-  background: linear-gradient(to bottom right, #3666f8, #5afffa);
-  border: 0;
-  border-radius: 12px;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 2.5;
-  outline: transparent;
-  padding: 0 1rem;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow 0.2s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-}
-
-.product-wrapper .add-to-cart .btn:not([disabled]):focus {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(59, 238, 247, 0.5),
-    0.125rem 0.125rem 1rem rgba(90, 255, 236, 0.5);
-}
-
-.product-wrapper .add-to-cart .btn:not([disabled]):hover {
-  font-weight: 600;
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(54, 193, 243, 0.5),
-    0.125rem 0.125rem 1rem rgba(90, 167, 255, 0.5);
-}
-
-
 .products-list-wrapper {
-    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
-    cursor: pointer;
+    justify-content: center;
 }
 
 .product-wrapper {
-    max-width: 350px;
+    margin: 10px;
+    max-width: 300px;
     max-height: fit-content;
     text-align: center;
-    margin: 15px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .product-wrapper:hover {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 1px solid rgb(8, 255, 251);
 }
 
 .product-wrapper .product {
@@ -75,11 +38,11 @@
     position: absolute;
     right: 0;
     top: 0;
-    margin: 10px;
+    margin: 10px 10px 0 0;
     background-color: white;
-    padding: 10px;
+    padding: 0.5em;
     border-radius: 50%;
-    display: flex
+    display: flex;
 }
 
 .product-wrapper .favorite-icon:hover {
