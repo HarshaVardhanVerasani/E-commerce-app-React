@@ -5,6 +5,7 @@ import Login from "../Login/Login";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductList from "../ProductList/ProductList";
 import Cart from "../Cart/Cart";
+import ErrorPage from "../404Error/ErrorPage";
 
 const AppRoutes = () => {
   return (
@@ -13,8 +14,9 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/product-details/:id/:title" element={<ProductDetails />} />
       <Route path="/product-list" element={<ProductList />} />
-      <Route path="/checkout" element={<CheckOut />} />
+      <Route path="/checkout/:id/:quantity" element={<CheckOut />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="*" element={<ErrorPage/>}/>
     </Routes>
   );
 };

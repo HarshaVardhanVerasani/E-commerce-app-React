@@ -11,7 +11,7 @@ function App() {
   
   async function get() {
     const res = await axios
-      .get("https://dummyjson.com/products")
+      .get("https://dummyjson.com/products?limit=0")
       .catch((err) => console.log("Error", err));
       dispatch(onWindowLoad(res.data.products));
   }
