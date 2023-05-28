@@ -77,11 +77,11 @@
 
 .filter-section {
     display: flex;
-    justify-content: end;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px;
 }
 
 .filter-section .btn-group, .filter-section .dropdown-menu {
     text-align: center;
-    width:100%;
-    
 }

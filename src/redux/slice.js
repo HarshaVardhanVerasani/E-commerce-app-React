@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addItem, decrement, deleteItem, increment, sortProducts } from "./utils";
-
+import {
+  addItem,
+  decrement,
+  deleteItem,
+  increment,
+  searchProduct,
+  sortProducts,
+} from "./utils";
 
 const e_commerce = createSlice({
   name: "E-Commerce",
@@ -32,6 +38,9 @@ const e_commerce = createSlice({
     applyFilters: (state, action) => {
       state.TotalProducts = sortProducts(state, action.payload);
     },
+    searchByName: (state, action) => {
+      state.TotalProducts = searchProduct(state, action);
+    },
   },
 });
 
@@ -43,4 +52,5 @@ export const {
   increaseQuantity,
   removeFromCart,
   applyFilters,
+  searchByName,
 } = e_commerce.actions;

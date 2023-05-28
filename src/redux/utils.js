@@ -38,12 +38,25 @@ export function sortProducts(state, filter) {
       a.title.localeCompare(b.title)
     );
   }
-  if(filter.lowToHigh){
-    filteredProducts = filteredProducts.sort((a,b) => a.price - b.price)
+  if (filter.lowToHigh) {
+    filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
   }
-  if(filter.highToLow){
-    filteredProducts = filteredProducts.sort((a,b) => b.price - a.price)
+  if (filter.highToLow) {
+    filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
   }
   return filteredProducts;
+}
+
+export function searchProduct(state, action) {
+  let searchItem = state.TotalProducts.filter((product) =>
+    product.title
+      .toLowerCase()
+      .includes(action.payload.toLowerCase())
+  );
+  if (searchItem.length > 0) {
+    return searchItem;
+  } else if (searchItem === undefined || searchItem.length === 0) {
+    return state.__Products;
+  }
 }
 

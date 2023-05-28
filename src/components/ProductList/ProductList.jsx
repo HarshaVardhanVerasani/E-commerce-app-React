@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addToCart, applyFilters, removeFromCart } from "../../redux/slice";
+import {
+  addToCart,
+  applyFilters,
+  removeFromCart,
+  searchByName,
+} from "../../redux/slice";
 import "../ProductList/productList.css";
 
 const ProductList = () => {
@@ -14,6 +19,7 @@ const ProductList = () => {
     lowToHigh: false,
     highToLow: false,
   });
+  const [searchInput, setSearchInput] = useState("");
 
   function handleAddOrRemoveFromCart(e, id) {
     if (e.target.name === "ADD_TO_CART") {
@@ -61,8 +67,13 @@ const ProductList = () => {
   }
 
   useEffect(() => {
-    dispatch(applyFilters(filters));
-  }, [filters]);
+    if (searchInput) {
+      dispatch(searchByName(searchInput));
+    } else if (filters) {
+      dispatch(applyFilters(filters));
+    }
+  }, [filters, searchInput]);
+
 
   let renderList = totalProducts.map((product) => {
     const { id, title, thumbnail, price, rating } = product;
@@ -129,61 +140,76 @@ const ProductList = () => {
       )}
 
       {renderList.length > 0 && (
-        <div className="container filter-section">
-          <div className="btn-group">
-            <button
-              type="button"
-              className="btn btn-info dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Filters
-            </button>
-            <ul className="dropdown-menu">
-              <label className="form-check-label" htmlFor="BY_NAMES">
-                A to Z order
-              </label>
+        <>
+          <div className="container filter-section">
+            <form className="d-flex" role="search">
               <input
-                className="form-check-input"
-                type="checkbox"
-                name="BY_NAMES"
-                checked={filters.byNames}
-                onChange={handleFilterEvents}
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchInput}
+                onInput={(e) => setSearchInput(e.target.value)}
               />
-              <li>
-                <label className="form-check-label" htmlFor="LOW_TO_HIGH">
-                  Low To High
-                </label>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="LOW_TO_HIGH"
-                  checked={filters.lowToHigh}
-                  onChange={handleFilterEvents}
-                />
-              </li>
-              <li>
-                <label className="form-check-label" htmlFor="HIGH_TO_LOW">
-                  High To Low
-                </label>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="HIGH_TO_LOW"
-                  checked={filters.highToLow}
-                  onChange={handleFilterEvents}
-                />
-              </li>
+            </form>
+            <div className="btn-group">
               <button
-                className="btn btn-secondary"
-                name="CLEAR_FILTER"
-                onClick={handleFilterEvents}
+                type="button"
+                className="btn btn-info dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                Clear Filters
+                Filters
               </button>
-            </ul>
+              <ul className="dropdown-menu">
+                <label className="form-check-label" htmlFor="by-names">
+                  A to Z order
+                </label>
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name="BY_NAMES"
+                  id="by-names"
+                  checked={filters.byNames}
+                  onChange={handleFilterEvents}
+                />
+                <li>
+                  <label className="form-check-label" htmlFor="low-to-high">
+                    Low To High
+                  </label>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="LOW_TO_HIGH"
+                    id="low-to-high"
+                    checked={filters.lowToHigh}
+                    onChange={handleFilterEvents}
+                  />
+                </li>
+                <li>
+                  <label className="form-check-label" htmlFor="high-to-low">
+                    High To Low
+                  </label>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="HIGH_TO_LOW"
+                    id="high-to-low"
+                    checked={filters.highToLow}
+                    onChange={handleFilterEvents}
+                  />
+                </li>
+                <button
+                  className="btn btn-secondary"
+                  name="CLEAR_FILTER"
+                  onClick={handleFilterEvents}
+                >
+                  Clear Filters
+                </button>
+              </ul>
+            </div>
           </div>
-        </div>
+        </>
       )}
       <div className="products-list-wrapper">{renderList}</div>
     </>
