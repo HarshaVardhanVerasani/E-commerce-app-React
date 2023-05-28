@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -9,6 +8,7 @@ import {
 } from "../../redux/slice";
 import "./cart.css";
 
+import { useNavigate } from "react-router-dom";
 import cartImage from "../../images/cart-empty.jpg";
 
 const Cart = () => {
@@ -16,17 +16,19 @@ const Cart = () => {
   const cart = useSelector((store) => store.e_commerce.CartItems);
   const [totalItems, setTotalItems] = useState();
   const [grandTotal, setGrandTotal] = useState();
+  const navigate = useNavigate();
 
-  function handleQuantity(e) {
+  function checkEvents(e) {
     if (e.target.tagName === "BUTTON") {
       if (e.target.name === "INCREMENT") {
         dispatch(increaseQuantity(Number(e.target.value)));
       } else if (e.target.name === "DECREMENT") {
         dispatch(decreaseQuantity(Number(e.target.value)));
-      } else if (e.target.name === "REMOVE_FROM_CART")
-        dispatch(removeFromCart(e.target.value));
-    } else if (e.target.tagName === "svg") {
-      dispatch(removeFromCart(e.target.parentElement.value));
+      }
+    } else if (e.target.tagName === "I") {
+      if (e.target.parentElement.name === "REMOVE_FROM_CART") {
+        dispatch(removeFromCart(e.target.parentElement.value));
+      }
     }
   }
 
@@ -50,7 +52,7 @@ const Cart = () => {
         </div>
       )}
       {cart.length > 0 && (
-        <div className="cart-items" onClick={handleQuantity}>
+        <div className="cart-items" onClick={checkEvents}>
           {cart.map((product, i) => {
             const { id, title, thumbnail, price, quantity } = product;
             return (
@@ -86,10 +88,13 @@ const Cart = () => {
                 </div>
                 <button
                   value={id}
-                  name="REMOVE_FROM_CART"
                   className="delete-icon"
+                  name="REMOVE_FROM_CART"
                 >
-                  <RiDeleteBin2Fill />
+                  <i
+                    class="fa-solid fa-trash-can fa-xl"
+                    style={{ color: "#f70202" }}
+                  ></i>
                 </button>
               </div>
             );
@@ -108,7 +113,12 @@ const Cart = () => {
             <b>${grandTotal}</b>
           </div>
           <div>
-            <button className="btn btn-success">Place Order</button>
+            <button
+              className="btn btn-success"
+              onClick={() => navigate(`/checkout/${grandTotal}`)}
+            >
+              Place Order
+            </button>
           </div>
         </div>
       )}

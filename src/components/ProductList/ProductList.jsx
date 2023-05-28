@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addToCart, removeFromCart } from "../../redux/slice";
+import { addToCart, applyFilters, removeFromCart } from "../../redux/slice";
 import "../ProductList/productList.css";
 
 const ProductList = () => {
@@ -8,6 +9,11 @@ const ProductList = () => {
   const cart = useSelector((store) => store.e_commerce.CartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [filters, setFilters] = useState({
+    byNames: false,
+    lowToHigh: false,
+    highToLow: false,
+  });
 
   function handleAddOrRemoveFromCart(e, id) {
     if (e.target.name === "ADD_TO_CART") {
@@ -22,18 +28,41 @@ const ProductList = () => {
       handleAddOrRemoveFromCart(e, id);
       return;
     } else if (e.target.tagName === "I") {
-      if (e.target.attributes["name"].value === "ADD_TO_FAVORITE") {
-        console.log("button for i and button");
+      if (e.target.parentElement.name === "ADD_TO_FAVORITE") {
+        console.log("button for i and button", e.target.parentElement.value);
       }
       return;
     }
     navigate(`/product-details/${id}/${title}`);
   }
 
-  function handleFilterEvents (e) {
-    
-    console.log(e.target)
+  function handleFilterEvents(e) {
+    if (e.target.name === "BY_NAMES") {
+      setFilters({ ...filters, byNames: !filters.byNames });
+    } else if (e.target.name === "LOW_TO_HIGH") {
+      setFilters({
+        ...filters,
+        lowToHigh: true,
+        highToLow: false,
+      });
+    } else if (e.target.name === "HIGH_TO_LOW") {
+      setFilters({
+        ...filters,
+        lowToHigh: false,
+        highToLow: true,
+      });
+    } else if (e.target.name === "CLEAR_FILTER") {
+      setFilters({
+        byNames: false,
+        lowToHigh: false,
+        highToLow: false,
+      });
+    }
   }
+
+  useEffect(() => {
+    dispatch(applyFilters(filters));
+  }, [filters]);
 
   let renderList = totalProducts.map((product) => {
     const { id, title, thumbnail, price, rating } = product;
@@ -47,8 +76,8 @@ const ProductList = () => {
           <div className="product-img">
             <img src={`${thumbnail}`} alt={title} />
           </div>
-          <button className="favorite-icon">
-            <i className="fa-regular fa-heart" name="ADD_TO_FAVORITE"></i>
+          <button className="favorite-icon" name="ADD_TO_FAVORITE" value={id}>
+            <i className="fa-regular fa-heart"></i>
           </button>
         </div>
         <div className="product-details">
@@ -98,46 +127,49 @@ const ProductList = () => {
           </div>
         </div>
       )}
-      <div className="filter-section">
-        <div class="btn-group">
+
+      <div className="container filter-section">
+        <div className="btn-group">
           <button
             type="button"
-            class="btn btn-info dropdown-toggle"
+            className="btn btn-info dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
             Filters
           </button>
-          <ul class="dropdown-menu">
-            <label className="form-check-label" htmlFor="alphabetical">
+          <ul className="dropdown-menu">
+            <label className="form-check-label" htmlFor="BY_NAMES">
               A to Z order
             </label>
             <input
               className="form-check-input"
               type="checkbox"
-              name="flexRadioDefault"
-              id="alphabetical"
+              name="BY_NAMES"
+              checked={filters.byNames}
               onChange={handleFilterEvents}
             />
             <li>
-              <label className="form-check-label" htmlFor="ascending">
-                Ascending Order
+              <label className="form-check-label" htmlFor="LOW_TO_HIGH">
+                Low To High
               </label>
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="ascending"
+                name="LOW_TO_HIGH"
+                checked={filters.lowToHigh}
                 onChange={handleFilterEvents}
               />
-              <label className="form-check-label" htmlFor="descending">
-                Descending Order
+            </li>
+            <li>
+              <label className="form-check-label" htmlFor="HIGH_TO_LOW">
+                High To Low
               </label>
               <input
                 className="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="descending"
+                name="HIGH_TO_LOW"
+                checked={filters.highToLow}
                 onChange={handleFilterEvents}
               />
             </li>
