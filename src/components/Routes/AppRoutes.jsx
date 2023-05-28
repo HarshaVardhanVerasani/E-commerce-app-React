@@ -14,7 +14,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/product-details/:id/:title" element={<ProductDetails />} />
       <Route path="/product-list" element={<ProductList />} />
-      <Route path="/checkout/:id/:quantity" element={<CheckOut />} />
+      <Route path="/checkout/:bill" element={<CheckOut />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="*" element={<ErrorPage/>}/>
     </Routes>

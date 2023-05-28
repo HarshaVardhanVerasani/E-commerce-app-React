@@ -74,3 +74,14 @@
     display: flex;
     justify-content: center;
 }
+
+.filter-section {
+    display: flex;
+    justify-content: end;
+}
+
+.filter-section .btn-group, .filter-section .dropdown-menu {
+    text-align: center;
+    width:100%;
+    
+}

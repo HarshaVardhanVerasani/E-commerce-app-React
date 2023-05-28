@@ -3,11 +3,10 @@ export function deleteItem(cart, id) {
   return findProduct;
 }
 
-
-export function addItem(totalProducts,cart,id) {
+export function addItem(totalProducts, cart, id) {
   //This ensures not to add duplicate items in cart
-  if(cart.some(p => p.id === +id)){
-    return null
+  if (cart.some((p) => p.id === +id)) {
+    return null;
   }
 
   //this will ensures to add new item to cart with new property name quantity
@@ -16,8 +15,7 @@ export function addItem(totalProducts,cart,id) {
   return Item;
 }
 
-
-export function decrement(state, action){
+export function decrement(state, action) {
   let itemToUpdate = state.CartItems.find(
     (product) => product.id === action.payload
   );
@@ -26,9 +24,26 @@ export function decrement(state, action){
   }
 }
 
-export function increment(state,action) {
-   let itemToUpdate = state.CartItems.find(
-     (product) => product.id === action.payload
-   );
-   itemToUpdate.quantity += 1;
+export function increment(state, action) {
+  let itemToUpdate = state.CartItems.find(
+    (product) => product.id === action.payload
+  );
+  itemToUpdate.quantity += 1;
 }
+
+export function sortProducts(state, filter) {
+  let filteredProducts = [...state.__Products];
+  if (filter.byNames) {
+    filteredProducts = filteredProducts.sort((a, b) =>
+      a.title.localeCompare(b.title)
+    );
+  }
+  if(filter.lowToHigh){
+    filteredProducts = filteredProducts.sort((a,b) => a.price - b.price)
+  }
+  if(filter.highToLow){
+    filteredProducts = filteredProducts.sort((a,b) => b.price - a.price)
+  }
+  return filteredProducts;
+}
+

@@ -1,12 +1,19 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import "./checkout.css";
+import { useParams } from "react-router-dom";
+import american from "../../images/american-express.png";
+import apple from "../../images/apple-pay.png";
+import google from "../../images/google-pay.png"
+import paypal from "../../images/paypal.png";
+import paytm from "../../images/paytm.png"
+import visa from "../../images/visa.png"
 
 const CheckOut = () => {
-  const store = useSelector((store) => store.e_commerce.TotalProducts);
-  const param = useParams();
-  const product = store.find((item) => item.id === +param.id);
-  console.log(store)
+  const param = useParams()
+  const {bill} = param
+  const Cart = useSelector((store) => store.e_commerce.CartItems);
+
+
   return (
     <div className="checkout">
       <table className="table">
@@ -20,15 +27,37 @@ const CheckOut = () => {
           </tr>
         </thead>
         <tbody>
+          {Cart.map((product, i) => (
+            <tr>
+              <th scope="row">{i + 1}</th>
+              <td>{product.title}</td>
+              <td>${product.price}</td>
+              <td>{product.quantity}</td>
+              <td>${product.quantity * product.price}</td>
+            </tr>
+          ))}
           <tr>
-            <th scope="row">1</th>
-            <td>{product.title}</td>
-            <td>${product.price}</td>
-            <td>{param.quantity}</td>
-            <td>${param.quantity * product.price}</td>
+            <th scope="row">#</th>
+            <td colspan="3">
+              <b>Total Bill</b>
+            </td>
+            <td>
+              <b> ${bill}</b>
+            </td>
           </tr>
         </tbody>
       </table>
+      <div className="payment-btn">
+        <button className="btn btn-success">Proceed To Payment</button>
+      </div>
+      <div className="payment-methods">
+        <img src={american} alt="american-express" />
+        <img src={apple} alt="apple-pay" />
+        <img src={google} alt="google-pay" />
+        <img src={paypal} alt="paypal" />
+        <img src={paytm} alt="paytm" />
+        <img src={visa} alt="visa" />
+      </div>
     </div>
   );
 };

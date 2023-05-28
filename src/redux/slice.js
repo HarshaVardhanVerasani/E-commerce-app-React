@@ -1,17 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addItem, decrement, deleteItem, increment } from "./utils";
+import { addItem, decrement, deleteItem, increment, sortProducts } from "./utils";
+
 
 const e_commerce = createSlice({
   name: "E-Commerce",
   initialState: {
     CartItems: [],
     TotalProducts: [],
-    Products: [],
+    __Products: [],
   },
   reducers: {
     onWindowLoad: (state, action) => {
       state.TotalProducts = action.payload;
-      state.filteredProducts = action.payload;
+      state.__Products = action.payload;
     },
     addToCart: (state, action) => {
       let item = addItem(state.TotalProducts, state.CartItems, action.payload);
@@ -28,6 +29,9 @@ const e_commerce = createSlice({
     decreaseQuantity: (state, action) => {
       decrement(state, action);
     },
+    applyFilters: (state, action) => {
+      state.TotalProducts = sortProducts(state, action.payload);
+    },
   },
 });
 
@@ -38,4 +42,5 @@ export const {
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
+  applyFilters,
 } = e_commerce.actions;

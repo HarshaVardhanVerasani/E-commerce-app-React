@@ -1,0 +1,15 @@
+.checkout .payment-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.checkout .payment-methods {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.checkout .payment-methods img {
+    width: 80px;
+    height: 80px;
+}
