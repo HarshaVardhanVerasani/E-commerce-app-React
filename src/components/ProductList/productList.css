@@ -18,20 +18,16 @@
 }
 
 .product-wrapper:hover {
-    border: 1px solid rgb(8, 255, 251);
+   transform: scale(1.02);
+}
+
+
+.product-wrapper .product-img img {
+    width: 100%;
 }
 
 .product-wrapper .product {
     position: relative;
-}
-
-.product-wrapper .product-img {
-    background-color:#F5F6F6;
-    border-radius: 16px;
-}
-
-.product-wrapper .product-img img {
-    width: 100%;
 }
 
 .product-wrapper .favorite-icon {
@@ -39,10 +35,13 @@
     right: 0;
     top: 0;
     margin: 10px 10px 0 0;
-    background-color: white;
-    padding: 0.5em;
+    border: none;
     border-radius: 50%;
-    display: flex;
+    overflow: hidden;
+}
+
+.product-wrapper .favorite-icon i {
+    padding: 8px;
 }
 
 .product-wrapper .favorite-icon:hover {

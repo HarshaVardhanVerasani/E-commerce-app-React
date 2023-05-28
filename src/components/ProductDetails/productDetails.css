@@ -1,34 +1,15 @@
 .product-details-wrapper {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-}
-
-.product-details-wrapper .progressive-bar {
-  width: fit-content;
-  height: fit-content;
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-}
-
-.product-details-wrapper .details {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 10px;
 }
 
 .product-details-wrapper .details > div {
-  height: 65%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .product-details-wrapper .buy-section {
+  margin: 10px 0;  
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -45,20 +26,8 @@
   max-height: 300px;
 }
 
-.product-details-wrapper .details .price-quant-section {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 8px;
-}
 
-.product-details-wrapper .details .price-quant-section .quantity input {
-  width: 50px;
-  height: 42px;
-  line-height: 1.65;
-  padding-left: 20px;
-  border: 1px solid #eee;
-}
+
 
 
 

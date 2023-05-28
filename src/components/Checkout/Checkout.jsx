@@ -5,7 +5,7 @@ import "./checkout.css";
 const CheckOut = () => {
   const store = useSelector((store) => store.e_commerce.TotalProducts);
   const param = useParams();
-  const product = store.find((item) => item.id == param.id);
+  const product = store.find((item) => item.id === +param.id);
   console.log(store)
   return (
     <div className="checkout">
