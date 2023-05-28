@@ -4,48 +4,52 @@ import { addToCart, removeFromCart } from "../../redux/slice";
 import "../ProductList/productList.css";
 
 const ProductList = () => {
-  const store = useSelector((store) => store.e_commerce.TotalProducts);
+  const totalProducts = useSelector((store) => store.e_commerce.TotalProducts);
   const cart = useSelector((store) => store.e_commerce.CartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleAddOrRemoveFromCart(e, id) {
     if (e.target.name === "ADD_TO_CART") {
-      let findProduct = store.find((product) => product.id === Number(id));
-      findProduct = { ...findProduct, quantity: 1 };
-      dispatch(addToCart(findProduct));
+      dispatch(addToCart(id));
     } else if (e.target.name === "REMOVE_FROM_CART") {
-      let newCart = cart.filter((product) => product.id !== Number(id));
-      dispatch(removeFromCart(newCart));
+      dispatch(removeFromCart(id));
     }
   }
 
-  function showSingleProduct(e, id, title) {
+  function checkEvents(e, id, title) {
     if (e.target.tagName === "BUTTON") {
       handleAddOrRemoveFromCart(e, id);
+      return;
+    } else if (e.target.tagName === "I") {
+      if (e.target.attributes["name"].value === "ADD_TO_FAVORITE") {
+        console.log("button for i and button");
+      }
       return;
     }
     navigate(`/product-details/${id}/${title}`);
   }
 
-  let renderList = store.map((product) => {
+  function handleFilterEvents (e) {
+    
+    console.log(e.target)
+  }
+
+  let renderList = totalProducts.map((product) => {
     const { id, title, thumbnail, price, rating } = product;
     return (
       <div
         className="product-wrapper"
         key={id}
-        onClick={(e) => showSingleProduct(e, id, title)}
+        onClick={(e) => checkEvents(e, id, title)}
       >
         <div className="product">
           <div className="product-img">
             <img src={`${thumbnail}`} alt={title} />
           </div>
-          <div className="favorite-icon">
-            <img
-              src="https://uploads-ssl.webflow.com/63e857eaeaf853471d5335ff/63e9df775b939f51a0b22f6d_Icon.svg"
-              alt="favorite-icon"
-            />
-          </div>
+          <button className="favorite-icon">
+            <i className="fa-regular fa-heart" name="ADD_TO_FAVORITE"></i>
+          </button>
         </div>
         <div className="product-details">
           <div className="product-title">
@@ -87,13 +91,66 @@ const ProductList = () => {
 
   return (
     <>
-      {renderList.length === 0 && (
+      {(renderList.length === 0 || renderList === undefined) && (
         <div className="d-flex justify-content-center">
           <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )}
+      <div className="filter-section">
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-info dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Filters
+          </button>
+          <ul class="dropdown-menu">
+            <label className="form-check-label" htmlFor="alphabetical">
+              A to Z order
+            </label>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              name="flexRadioDefault"
+              id="alphabetical"
+              onChange={handleFilterEvents}
+            />
+            <li>
+              <label className="form-check-label" htmlFor="ascending">
+                Ascending Order
+              </label>
+              <input
+                className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="ascending"
+                onChange={handleFilterEvents}
+              />
+              <label className="form-check-label" htmlFor="descending">
+                Descending Order
+              </label>
+              <input
+                className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="descending"
+                onChange={handleFilterEvents}
+              />
+            </li>
+            <button
+              className="btn btn-secondary"
+              name="CLEAR_FILTER"
+              onClick={handleFilterEvents}
+            >
+              Clear Filters
+            </button>
+          </ul>
+        </div>
+      </div>
       <div className="products-list-wrapper">{renderList}</div>
     </>
   );
