@@ -128,61 +128,63 @@ const ProductList = () => {
         </div>
       )}
 
-      <div className="container filter-section">
-        <div className="btn-group">
-          <button
-            type="button"
-            className="btn btn-info dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Filters
-          </button>
-          <ul className="dropdown-menu">
-            <label className="form-check-label" htmlFor="BY_NAMES">
-              A to Z order
-            </label>
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="BY_NAMES"
-              checked={filters.byNames}
-              onChange={handleFilterEvents}
-            />
-            <li>
-              <label className="form-check-label" htmlFor="LOW_TO_HIGH">
-                Low To High
-              </label>
-              <input
-                className="form-check-input"
-                type="radio"
-                name="LOW_TO_HIGH"
-                checked={filters.lowToHigh}
-                onChange={handleFilterEvents}
-              />
-            </li>
-            <li>
-              <label className="form-check-label" htmlFor="HIGH_TO_LOW">
-                High To Low
-              </label>
-              <input
-                className="form-check-input"
-                type="radio"
-                name="HIGH_TO_LOW"
-                checked={filters.highToLow}
-                onChange={handleFilterEvents}
-              />
-            </li>
+      {renderList.length > 0 && (
+        <div className="container filter-section">
+          <div className="btn-group">
             <button
-              className="btn btn-secondary"
-              name="CLEAR_FILTER"
-              onClick={handleFilterEvents}
+              type="button"
+              className="btn btn-info dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              Clear Filters
+              Filters
             </button>
-          </ul>
+            <ul className="dropdown-menu">
+              <label className="form-check-label" htmlFor="BY_NAMES">
+                A to Z order
+              </label>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="BY_NAMES"
+                checked={filters.byNames}
+                onChange={handleFilterEvents}
+              />
+              <li>
+                <label className="form-check-label" htmlFor="LOW_TO_HIGH">
+                  Low To High
+                </label>
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="LOW_TO_HIGH"
+                  checked={filters.lowToHigh}
+                  onChange={handleFilterEvents}
+                />
+              </li>
+              <li>
+                <label className="form-check-label" htmlFor="HIGH_TO_LOW">
+                  High To Low
+                </label>
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="HIGH_TO_LOW"
+                  checked={filters.highToLow}
+                  onChange={handleFilterEvents}
+                />
+              </li>
+              <button
+                className="btn btn-secondary"
+                name="CLEAR_FILTER"
+                onClick={handleFilterEvents}
+              >
+                Clear Filters
+              </button>
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
       <div className="products-list-wrapper">{renderList}</div>
     </>
   );
