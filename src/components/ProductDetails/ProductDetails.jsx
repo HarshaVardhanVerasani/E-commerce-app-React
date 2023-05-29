@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../redux/slice";
 import "./productDetails.css";
+import LoadingBar from "../LoadingBar/LoadingBar";
 
 const ProductDetails = () => {
   const cart = useSelector((store) => store.e_commerce.CartItems);
@@ -20,19 +21,7 @@ const ProductDetails = () => {
 
   return (
     <section className="product-details-wrapper mt-4">
-      {product === undefined && (
-        <div className="progressive-bar text-center">
-          <button className="btn btn-primary" type="button">
-            <span
-              className="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Loading...
-          </button>
-        </div>
-      )}
-
+      <LoadingBar value={product}/>
       <div className="row flex-wrap justify-content-space-between">
         <div className="col-lg-6 col-md-12 carousel-section">
           {product && (

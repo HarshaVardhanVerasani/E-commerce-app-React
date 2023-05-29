@@ -15,50 +15,55 @@ const CheckOut = () => {
 
 
   return (
-    <div className="checkout">
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">S.no</th>
-            <th scope="col">Item</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">SubTotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Cart.map((product, i) => (
+    <>
+      <div className="checkout">
+        <table className="table">
+          <thead>
             <tr>
-              <th scope="row">{i + 1}</th>
-              <td>{product.title}</td>
-              <td>${product.price}</td>
-              <td>{product.quantity}</td>
-              <td>${product.quantity * product.price}</td>
+              <th scope="col">S.no</th>
+              <th scope="col">Item</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">SubTotal</th>
             </tr>
-          ))}
-          <tr>
-            <th scope="row">#</th>
-            <td colspan="3">
-              <b>Total Bill</b>
-            </td>
-            <td>
-              <b> ${bill}</b>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="payment-btn">
-        <button className="btn btn-success">Proceed To Payment</button>
+          </thead>
+          <tbody>
+            {Cart.map((product, i) => (
+              <tr>
+                <th scope="row">{i + 1}</th>
+                <td>{product.title}</td>
+                <td>${product.price}</td>
+                <td>{product.quantity}</td>
+                <td>${product.quantity * product.price}</td>
+              </tr>
+            ))}
+            <tr>
+              <th scope="row">#</th>
+              <td colspan="3">
+                <b>Total Bill</b>
+              </td>
+              <td>
+                <b> ${bill}</b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="payment-btn">
+          <button className="btn btn-success">Proceed To Payment</button>
+        </div>
       </div>
-      <div className="payment-methods">
-        <img src={american} alt="american-express" />
-        <img src={apple} alt="apple-pay" />
-        <img src={google} alt="google-pay" />
-        <img src={paypal} alt="paypal" />
-        <img src={paytm} alt="paytm" />
-        <img src={visa} alt="visa" />
-      </div>
-    </div>
+      <footer className="checkout-footer">
+        <h4>We Accept All Types Of Payment Methods</h4>
+        <div className="payment-methods">
+          <img src={american} alt="american-express" />
+          <img src={apple} alt="apple-pay" />
+          <img src={google} alt="google-pay" />
+          <img src={paypal} alt="paypal" />
+          <img src={paytm} alt="paytm" />
+          <img src={visa} alt="visa" />
+        </div>
+      </footer>
+    </>
   );
 };
 
