@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import CheckOut from "../Checkout/Checkout";
-import LandingPage from "../LandingPage/LandingPage";
+import LandingPage from "../Home/LandingPage";
 import Login from "../Login/Login";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductList from "../ProductList/ProductList";
