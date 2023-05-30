@@ -39,8 +39,13 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cart">
-                <b>Cart</b>{" "}
+                <b>Cart</b>
                 <i className="badge">{cart.length ? cart.length : ""}</i>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/favorite-list">
+                <b>Favorite</b>
               </Link>
             </li>
             <li className="nav-item">

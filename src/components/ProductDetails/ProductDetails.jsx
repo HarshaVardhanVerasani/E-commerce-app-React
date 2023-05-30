@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../redux/slice";
-import "./productDetails.css";
 import LoadingBar from "../LoadingBar/LoadingBar";
+import "./productDetails.css";
 
 const ProductDetails = () => {
   const cart = useSelector((store) => store.e_commerce.CartItems);
   const totalProducts = useSelector((store) => store.e_commerce.TotalProducts);
-
-  const param = useParams();
-  const { id } = param;
-  const product = totalProducts.find((product) => product.id === +id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const param = useParams();
+  
+  const { id } = param;
+  const product = totalProducts.find((product) => product.id === +id);
 
   function handleBuyNow(id) {
     dispatch(addToCart(id));
@@ -21,7 +21,7 @@ const ProductDetails = () => {
 
   return (
     <section className="product-details-wrapper mt-4">
-      <LoadingBar value={product}/>
+      <LoadingBar data={product} />
       <div className="row flex-wrap justify-content-space-between">
         <div className="col-lg-6 col-md-12 carousel-section">
           {product && (
