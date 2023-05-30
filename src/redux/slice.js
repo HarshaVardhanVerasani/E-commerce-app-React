@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addItem,
+  addToFav,
   decrement,
+  deleteFav,
   deleteItem,
   increment,
   searchProduct,
@@ -13,10 +15,11 @@ const e_commerce = createSlice({
   initialState: {
     CartItems: [],
     TotalProducts: [],
+    Favorite: [],
     __Products: [],
   },
   reducers: {
-    onWindowLoad: (state, action) => {
+    loadProducts: (state, action) => {
       state.TotalProducts = action.payload;
       state.__Products = action.payload;
     },
@@ -41,16 +44,24 @@ const e_commerce = createSlice({
     searchByName: (state, action) => {
       state.TotalProducts = searchProduct(state, action);
     },
+    addToFavorite: (state, action) => {
+      state.Favorite.push(addToFav(state, action.payload));
+    },
+    removeFromFavorite: (state, action) => {
+      state.Favorite = deleteFav(state, action.payload);
+    },
   },
 });
 
 export default e_commerce.reducer;
 export const {
-  onWindowLoad,
+  loadProducts,
   addToCart,
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
   applyFilters,
   searchByName,
+  addToFavorite,
+  removeFromFavorite,
 } = e_commerce.actions;

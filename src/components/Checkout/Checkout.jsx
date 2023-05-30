@@ -20,17 +20,17 @@ const CheckOut = () => {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">S.no</th>
-              <th scope="col">Item</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">SubTotal</th>
+              <th>S.no</th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>SubTotal</th>
             </tr>
           </thead>
           <tbody>
             {Cart.map((product, i) => (
-              <tr>
-                <th scope="row">{i + 1}</th>
+              <tr key={i}>
+                <th>{i + 1}</th>
                 <td>{product.title}</td>
                 <td>${product.price}</td>
                 <td>{product.quantity}</td>
@@ -38,8 +38,8 @@ const CheckOut = () => {
               </tr>
             ))}
             <tr>
-              <th scope="row">#</th>
-              <td colspan="3">
+              <th>#</th>
+              <td colSpan="3">
                 <b>Total Bill</b>
               </td>
               <td>

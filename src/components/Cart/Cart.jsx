@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
 } from "../../redux/slice";
 import "./cart.css";
-
 import { useNavigate } from "react-router-dom";
 import cartImage from "../../images/cart-empty.jpg";
+
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -92,7 +91,7 @@ const Cart = () => {
                   name="REMOVE_FROM_CART"
                 >
                   <i
-                    class="fa-solid fa-trash-can fa-xl"
+                    className="fa-solid fa-trash-can fa-xl"
                     style={{ color: "#f70202" }}
                   ></i>
                 </button>

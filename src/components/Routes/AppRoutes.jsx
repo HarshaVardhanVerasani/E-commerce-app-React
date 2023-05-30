@@ -6,6 +6,7 @@ import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductList from "../ProductList/ProductList";
 import Cart from "../Cart/Cart";
 import ErrorPage from "../404Error/ErrorPage";
+import FavoriteList from "../FavoriteList/FavoriteList";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Route path="/product-list" element={<ProductList />} />
       <Route path="/checkout/:bill" element={<CheckOut />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/favorite-list" element={<FavoriteList/>} />
       <Route path="*" element={<ErrorPage/>}/>
     </Routes>
   );

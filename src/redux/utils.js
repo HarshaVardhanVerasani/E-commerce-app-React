@@ -1,6 +1,6 @@
 export function deleteItem(cart, id) {
-  let findProduct = cart.filter((product) => product.id !== Number(id));
-  return findProduct;
+  let products = cart.filter((product) => product.id !== Number(id));
+  return products;
 }
 
 export function addItem(totalProducts, cart, id) {
@@ -13,6 +13,16 @@ export function addItem(totalProducts, cart, id) {
   let findProduct = totalProducts.find((product) => product.id === Number(id));
   let Item = { ...findProduct, quantity: 1 };
   return Item;
+}
+
+export function addToFav(state, id){
+  let findFavItem = state.__Products.find(product => product.id === +id)
+  return findFavItem
+}
+
+export function deleteFav(state,id){
+  let newFavList = state.Favorite.filter(product => product.id !== +id)
+  return newFavList
 }
 
 export function decrement(state, action) {
@@ -48,15 +58,20 @@ export function sortProducts(state, filter) {
 }
 
 export function searchProduct(state, action) {
-  let searchItem = state.TotalProducts.filter((product) =>
-    product.title
-      .toLowerCase()
-      .includes(action.payload.toLowerCase())
+  let searchItem = [...state.__Products];
+  searchItem = searchItem.filter((product) =>
+    product.title.toLowerCase().includes(action.payload.toLowerCase())
   );
   if (searchItem.length > 0) {
+    // searchItem = searchItem.map((el) => {
+    //   console.log(action.payload);
+    //   el.title = el.title
+    //     .toLowerCase()
+    //     .replaceAll(action.payload, <i>{action.payload}</i>);
+    //   return el
+    // });
     return searchItem;
   } else if (searchItem === undefined || searchItem.length === 0) {
     return state.__Products;
   }
 }
-

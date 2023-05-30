@@ -1,24 +1,23 @@
-import axios from "axios";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import AppRoutes from "./components/Routes/AppRoutes";
-import { onWindowLoad } from "./redux/slice";
-
+import axios from "axios";
+import { useEffect } from "react";
+import { loadProducts } from "./redux/slice";
 function App() {
   const dispatch = useDispatch();
   
-  async function get() {
-    const res = await axios
-      .get("https://dummyjson.com/products?limit=0")
-      .catch((err) => console.log("Error", err));
-      dispatch(onWindowLoad(res.data.products));
-  }
+     async function getAllProducts() {
+       const res = await axios
+         .get("https://dummyjson.com/products?limit=0")
+         .catch((err) => console.log("Error", err));
+       dispatch(loadProducts(res.data.products));
+     }
 
-  useEffect(() => {
-    get();
-  }, []);
+     useEffect(() => {
+       getAllProducts();
+     }, []);
 
   return (
     <div className="App">
