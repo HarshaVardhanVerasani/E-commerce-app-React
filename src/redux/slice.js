@@ -16,6 +16,7 @@ const e_commerce = createSlice({
     CartItems: [],
     TotalProducts: [],
     Favorite: [],
+    inputStr:"",
     __Products: [],
   },
   reducers: {
@@ -42,6 +43,7 @@ const e_commerce = createSlice({
       state.TotalProducts = sortProducts(state, action.payload);
     },
     searchByName: (state, action) => {
+      state.inputStr = action.payload 
       state.TotalProducts = searchProduct(state, action);
     },
     addToFavorite: (state, action) => {

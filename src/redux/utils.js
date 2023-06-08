@@ -15,14 +15,14 @@ export function addItem(totalProducts, cart, id) {
   return Item;
 }
 
-export function addToFav(state, id){
-  let findFavItem = state.__Products.find(product => product.id === +id)
-  return findFavItem
+export function addToFav(state, id) {
+  let findFavItem = state.__Products.find((product) => product.id === +id);
+  return findFavItem;
 }
 
-export function deleteFav(state,id){
-  let newFavList = state.Favorite.filter(product => product.id !== +id)
-  return newFavList
+export function deleteFav(state, id) {
+  let newFavList = state.Favorite.filter((product) => product.id !== +id);
+  return newFavList;
 }
 
 export function decrement(state, action) {
@@ -63,13 +63,6 @@ export function searchProduct(state, action) {
     product.title.toLowerCase().includes(action.payload.toLowerCase())
   );
   if (searchItem.length > 0) {
-    // searchItem = searchItem.map((el) => {
-    //   console.log(action.payload);
-    //   el.title = el.title
-    //     .toLowerCase()
-    //     .replaceAll(action.payload, <i>{action.payload}</i>);
-    //   return el
-    // });
     return searchItem;
   } else if (searchItem === undefined || searchItem.length === 0) {
     return state.__Products;

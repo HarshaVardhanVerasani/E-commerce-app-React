@@ -7,12 +7,15 @@ import {
   removeFromFavorite,
 } from "../../redux/slice";
 import "./productCard.css";
+import { Heading, Highlight } from "@chakra-ui/react";
 
 const ProductCard = ({ data }) => {
   const favoriteList = useSelector((store) => store.e_commerce.Favorite);
   const cart = useSelector((store) => store.e_commerce.CartItems);
+  const str = useSelector((store) => store.e_commerce.inputStr);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   function handleAddOrRemoveFromCart(e, id) {
     if (e.target.name === "ADD_TO_CART") {
@@ -65,7 +68,14 @@ const ProductCard = ({ data }) => {
         </div>
         <div className="product-details">
           <div className="product-title">
-            <h4>{title}</h4>
+            <Heading as="h4" size="md">
+              <Highlight
+                query={str && str}
+                styles={{ px: "1", py: "1", bg: "orange.100" }}
+              >
+                {title}
+              </Highlight>
+            </Heading>
           </div>
           <div className="product-cost">
             <span>${price}</span>
