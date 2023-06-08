@@ -38,6 +38,8 @@ const FiltersComponent = () => {
   useEffect(() => {
     if (searchInput) {
       dispatch(searchByName(searchInput));
+    } else if (searchInput === "") {
+      dispatch(searchByName(searchInput));
     } else if (filters) {
       dispatch(applyFilters(filters));
     }
@@ -52,7 +54,7 @@ const FiltersComponent = () => {
           placeholder="Search"
           aria-label="Search"
           value={searchInput}
-          onInput={(e) => setSearchInput(e.target.value)}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
       </form>
       <div className="btn-group">
