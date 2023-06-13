@@ -27,7 +27,6 @@
 .cart-wrapper .item .image img {
   width: 100%;
   height: 100%;
-  margin:0 auto;
 }
 
 .cart-wrapper .total-price {
@@ -62,6 +61,7 @@
 .cart-wrapper .cart-empty img {
   width: 100%;
   max-width: 500px;
+  margin:0 auto;
 }
 
 
