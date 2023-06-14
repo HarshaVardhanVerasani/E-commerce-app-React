@@ -60,7 +60,7 @@ const Cart = () => {
                 <div className="image">
                   <img src={thumbnail} alt={title} className="img-fluid" />
                 </div>
-                <div>
+                <div style={{overflow:"auto"}}>
                   <h5>{title}</h5>
                   <h6>${price}</h6>
                 </div>

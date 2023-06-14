@@ -19,6 +19,7 @@
 }
 
 .cart-wrapper .item .image {
+  aspect-ratio: 1/1;
   width: 150px;
   border-radius: 15px;
   overflow: hidden;
