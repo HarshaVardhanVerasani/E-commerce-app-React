@@ -35,15 +35,18 @@ const FiltersComponent = () => {
     }
   }
 
+
   useEffect(() => {
     if (searchInput) {
       dispatch(searchByName(searchInput));
     } else if (searchInput === "") {
       dispatch(searchByName(searchInput));
-    } else if (filters) {
-      dispatch(applyFilters(filters));
     }
-  }, [filters, searchInput]);
+  }, [searchInput]);
+
+  useEffect(() => {
+    dispatch(applyFilters(filters));
+  }, [filters]);
 
   return (
     <div className="container filter-section">
