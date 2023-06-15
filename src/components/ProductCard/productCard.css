@@ -18,6 +18,7 @@
 .product-wrapper .product-img img {
     aspect-ratio: 1/1;
     width: 100%;
+    object-fit:contain;
 }
 
 .product-wrapper .product-image-section {
